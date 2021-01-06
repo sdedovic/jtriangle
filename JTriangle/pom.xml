@@ -1,0 +1,133 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dedovic</groupId>
+    <artifactId>jtriangle</artifactId>
+    <version>0.1.6</version>
+
+    <name>jtriangle</name>
+    <description>Java bindings for Triangle</description>
+    <!--    TODO: <url></url>   -->
+
+    <!--    TODO: <licenses></licenses>     -->
+    <!--    TODO: <developers></developers>     -->
+    <!--    TODO: <scm></scm>     -->
+
+    <!--
+      Define properties that are required for naming and identifying the
+      native libraries, based on the operating system and architecture:
+          jtriangle.os     : The short name for the operating system
+          jtriangle.arch   : The architecture of the target platform
+          jtriangle.ext    : The extension of the native libraries (e.g "dll" on Windows)
+          jtriangle.prefix : The prefix for native libraries (e.g. "lib" for Linux)
+      The native libraries will be named according to
+          ${jtriangle.prefix}LibraryName-${project.version}-${jtriangle.os}-${jtriangle.arch}.${jtriangle.ext}
+      e.g.
+          JTriangle-1.6-windows-x86_64.dll
+      or
+          libJTriangle-1.6-linux-x86_64.so
+    -->
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>windows-x86_64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>windows</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>dll</jtriangle.ext>
+                <jtriangle.prefix/>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>apple-x86_64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>apple</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>dylib</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-ppc_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>ppc64le</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>ppc_64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-aarch64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>aarch64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dedovic</groupId>
+            <artifactId>jtriangle-natives</artifactId>
+            <version>${project.version}</version>
+            <classifier>${jtriangle.os}-${jtriangle.arch}</classifier>
+        </dependency>
+
+    </dependencies>
+
+</project>

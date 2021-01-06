@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dedovic</groupId>
+    <artifactId>jtriangle-natives</artifactId>
+    <version>0.1.6</version>
+
+    <name>jtriangle-natives</name>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>windows-x86_64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>windows</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>dll</jtriangle.ext>
+                <jtriangle.prefix/>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>apple-x86_64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>apple</jtriangle.os>
+                <jtriangle.arch>x86_64</jtriangle.arch>
+                <jtriangle.ext>dylib</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-ppc_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>ppc64le</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>ppc_64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-aarch64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>aarch64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jtriangle.os>linux</jtriangle.os>
+                <jtriangle.arch>aarch64</jtriangle.arch>
+                <jtriangle.ext>so</jtriangle.ext>
+                <jtriangle.prefix>lib</jtriangle.prefix>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+
+                    <!-- Create the JAR containing the native libraries -->
+                    <execution>
+                        <id>create-native-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>nativeLibraries/${jtriangle.os}/${jtriangle.arch}</classesDirectory>
+                            <classifier>${jtriangle.os}-${jtriangle.arch}</classifier>
+                            <includes>
+                                <include>lib/*JTriangle*</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+
+                    <!-- Create the JAR containing the native sources -->
+                    <execution>
+                        <id>create-native-sources-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>${basedir}</classesDirectory>
+                            <classifier>sources</classifier>
+                            <includes>
+                                <include>JTriangleJNI/**</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
