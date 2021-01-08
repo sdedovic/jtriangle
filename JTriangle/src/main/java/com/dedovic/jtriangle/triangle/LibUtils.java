@@ -1,3 +1,4 @@
+package com.dedovic.jtriangle.triangle;
 /*
  * JCuda - Java bindings for NVIDIA CUDA driver and runtime API
  *

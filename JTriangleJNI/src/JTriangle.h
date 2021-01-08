@@ -7,20 +7,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
- * Class:     JTriangle
- * Method:    printFlags
- * Signature: ()Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_JTriangle_printFlags
-  (JNIEnv *, jclass);
 
 /*
- * Class:     JTriangle
- * Method:    triangulateV1
- * Signature: ([F)[I
- */
-JNIEXPORT jintArray JNICALL Java_JTriangle_triangulateV1(JNIEnv *, jclass, jfloatArray);
+* Class:     com_dedovic_jtriangle_triangle_JTriangle
+* Method:    triangulateInternal
+* Signature: (Ljava/lang/String;Lcom/dedovic/jtriangle/triangle/TriangulateIO;Lcom/dedovic/jtriangle/triangle/TriangulateIO;Lcom/dedovic/jtriangle/triangle/TriangulateIO;)V
+*/
+JNIEXPORT void JNICALL Java_com_dedovic_jtriangle_triangle_JTriangle_triangulateInternal
+        (JNIEnv *, jclass, jstring, jobject, jobject, jobject);
 
 #ifdef __cplusplus
 }

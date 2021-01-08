@@ -1,5 +1,6 @@
 nativeLibraries/
 
+*.class
 
 
 
