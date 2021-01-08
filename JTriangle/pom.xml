@@ -112,6 +112,35 @@
         </profile>
     </profiles>
 
+    <build>
+        <plugins>
+
+            <!--
+              Delete the temp files for the current version. (If new natives
+              are compiled, these should be picked up during the tests,
+              instead of using the libraries that had been unpacked to
+              the temp-directory before)
+            -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${java.io.tmpdir}</directory>
+                            <includes>
+                                <include>
+                                    ${jtriangle.prefix}JTriangle-${project.version}-${jtriangle.os}-${jtriangle.arch}.${jtriangle.ext}
+                                </include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
 
         <dependency>

@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
 PROJECT(JTriangle)
-SET(JTRIANGLE_VERSION 1.6)
+SET(JTRIANGLE_VERSION 0.1.6)
 
 if (CMAKE_HOST_WIN32)
     SET(JTRIANGLE_OS "windows")
@@ -34,11 +34,27 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/${JTRIANGLE_NATIVE_LIBR
 
 FIND_PACKAGE(JNI REQUIRED)
 
-INCLUDE_DIRECTORIES(./include/triangle ${JNI_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${JNI_INCLUDE_DIRS})
 
-ADD_LIBRARY(jtriangle SHARED src/JTriangle.h src/JTriangle.cpp)
+ADD_LIBRARY(jtriangle SHARED
+        src/JTriangle.cpp
+        src/triangle/triangle.c
 
+        src/triangle/triangle.h
+        src/JTriangle.h
+        )
+
+ADD_COMPILE_DEFINITIONS(
+        REAL=float
+        SINGLE
+        TRILIBRARY
+        ANSI_DECLARATORS
+        VOID=void
+)
 
 set_target_properties(jtriangle PROPERTIES
+#        CXX_STANDARD 11
+#        CXX_EXTENSIONS ON
+#        CXX_STANDARD_REQUIRED ON
         OUTPUT_NAME ${PROJECT_NAME}-${JTRIANGLE_VERSION}-${JTRIANGLE_OS}-${JTRIANGLE_ARCH})
 

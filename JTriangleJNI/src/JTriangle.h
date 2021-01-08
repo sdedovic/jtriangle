@@ -7,7 +7,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 /*
  * Class:     JTriangle
  * Method:    printFlags
@@ -15,6 +14,13 @@ extern "C" {
  */
 JNIEXPORT jstring JNICALL Java_JTriangle_printFlags
   (JNIEnv *, jclass);
+
+/*
+ * Class:     JTriangle
+ * Method:    triangulateV1
+ * Signature: ([F)[I
+ */
+JNIEXPORT jintArray JNICALL Java_JTriangle_triangulateV1(JNIEnv *, jclass, jfloatArray);
 
 #ifdef __cplusplus
 }
