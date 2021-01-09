@@ -33,7 +33,7 @@ javac -h .JTriangleJNI/src/ JTriangle/src/main/java/JTriangle.java JTriangle/src
 - [Jonathan Richard Shewchuk](https://people.eecs.berkeley.edu/~jrs/) for the wonderful Triangle tool
 
 ## License
-The original Triangle source code is distributed in this project. Refer to the [README](JTriangleJNI/include/triangle/README) of that project for licensing and stipulations.
+The original Triangle source code is distributed in this project. Refer to the [README](JTriangleJNI/src/triangle/README) of that project for licensing and stipulations.
 
 Some code has been taken from the [JCuda](https://github.com/jcuda) project. Refer to the [file headers](JTriangle/src/main/java/LibUtils.java) for licensing and stipulations.
 
